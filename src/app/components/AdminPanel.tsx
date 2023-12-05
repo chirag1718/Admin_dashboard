@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 import React, { ChangeEvent } from "react";
 import "../globals.css";
-import Button from "./UI Components/Button";
-import Input from "./UI Components/Input";
-import Checkbox from "./UI Components/Checkbox";
+import Button from "./UIComponents/Button";
+import Input from "./UIComponents/Input";
+import Checkbox from "./UIComponents/Checkbox";
 import { useTable } from "../Hooks/useTableHook";
 
 const AdminPanel = () => {
