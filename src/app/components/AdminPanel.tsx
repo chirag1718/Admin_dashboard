@@ -10,42 +10,49 @@ import {
   Save,
 } from "lucide-react";
 import React, { ChangeEvent } from "react";
-import "../globals.css";
+// import "../globals.css";
 import Button from "./UIComponents/Button";
 import Input from "./UIComponents/Input";
 import Checkbox from "./UIComponents/Checkbox";
-import { useTable } from "../Hooks/useTableHook";
+import { useData } from "../Hooks/useDataHook";
+import { usePagination } from "../Hooks/usePaginationHook";
+import { useSearch } from "../Hooks/useSearchHook";
+import { useForm } from "../Hooks/useFormHook";
+import { useSelection } from "../Hooks/useSelectionHook";
 
 const AdminPanel = () => {
+  // data
+  const { data, setData } = useData();
+  // form
   const {
-    // data
-    data,
-    // pagination
-    currentPage,
+    isEditActive,
+    editForm,
+    selectedUserId,
+    setIsEditActive,
+    handleFormChange,
+    handleSaveChanges,
+    toggleModal,
+  } = useForm();
+  // pagination
+  const {
     currentData,
+    currentPage,
     totalPages,
     setCurrentPage,
     handleFirstPage,
     handleLastPage,
     handleNextPage,
     handlePreviousPage,
-    // selection
+  } = usePagination();
+  //search
+  const { searchQuery, setSearchQuery, handleSearch } = useSearch();
+  //selection
+  const {
     selectedRows,
-    handleDeleteRows,
     handleRowSelection,
     handleSelectAll,
-    // search
-    handleSearch,
-    searchQuery,
-    setSearchQuery,
-    // edit
-    isEditActive,
-    editForm,
-    setIsEditActive,
-    toggleModal,
-    handleSaveChanges,
-    handleFormChange,
-  } = useTable();
+    handleDeleteRows,
+  } = useSelection();
 
   return (
     <div className="flex flex-col items-center justify-center gap-5 h-full w-full p-5 border rounded">
@@ -99,7 +106,7 @@ const AdminPanel = () => {
       </div>
 
       {/* table container */}
-      <div className="h-full w-full border rounded overflow-hidden xs:overflow-x-scroll sm:overflow-x-scroll md:overflow-x-scroll lg:overflow-x-scroll xl:overflow-hidden">
+      <div className="h-full w-full border rounded overflow-hidden xs:overflow-x-scroll sm:overflow-x-scroll md:overflow-x-scroll lg:overflow-x-scroll xl:overflow-x-scroll">
         {/* table */}
         <table className="h-full w-full ">
           <thead>
